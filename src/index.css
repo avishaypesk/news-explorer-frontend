@@ -1,2 +1,7 @@
 @import url('./vendor/fonts.css');
 @import url('./vendor/normalize.css');
+
+body {
+    display: block;
+    box-sizing: border-box;
+  }
