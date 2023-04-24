@@ -20,8 +20,9 @@
     border-radius: 100px;
 }
 
-/* .navbar__text_dark {
-  } */
+.navbar__text_dark {
+    color: #1A1B22;
+}
 
 @media screen and (min-width: 1000px) {
     .navbar__text_with-large-bubble {
