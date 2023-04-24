@@ -4,7 +4,7 @@ Main {
 
 .main__wrapper {
   min-height: 100vh;
-  background: url('../../images/main-bg-mobile.png') no-repeat;
+  background: url('../../images/bg-phone.png') no-repeat;
 }
 
 @media screen and (min-width: 1000px) {
@@ -16,7 +16,7 @@ Main {
 
 @media screen and (min-width: 767px) {
   .main__wrapper {
-    background: url('../../images/main-bg.png') no-repeat;
+    background: url('../../images/bg.png') no-repeat;
     background-position: top center;
     background-size: auto 400px;
   }
@@ -24,7 +24,7 @@ Main {
 
 @media screen and (min-width: 321px) {
   .main__wrapper {
-    background: url('../../images/main-bg.png') no-repeat;
+    background: url('../../images/bg.png') no-repeat;
     background-position: top center;
   }
 }
