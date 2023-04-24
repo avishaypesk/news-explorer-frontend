@@ -1,23 +1,26 @@
 .header {
-    height: 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 20px;
-    margin-left: 20px;
-  }
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0 20px;
+}
 
-  @media screen and (min-width: 1000px) {
-    .header {
-      height: 80px;
-      margin: 0 104px;
-    }
+.header_dark {
+  background-color: #1A1B22;
+}
+
+@media screen and (min-width: 1000px) {
+  .header {
+    height: 80px;
+    margin: 0 104px;
   }
-  
-  @media screen and (min-width: 650px) {
-    .header {
-      height: 66px;
-      margin: 0 40px;
-    }
+}
+
+@media screen and (min-width: 650px) {
+  .header {
+    height: 66px;
+    margin: 0 40px;
   }
-  
+}
