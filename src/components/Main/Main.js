@@ -3,6 +3,8 @@ import Header from '../Header/Header';
 import { usePopups } from '../../contexts/PopupContext';
 import UserMenu from '../UserMenu/UserMenu';
 import useWindowSize from '../../hooks/UseWindowSize';
+import PageTitle from '../PageTitle/PageTitle';
+import SearchForm from '../SearchForm/SearchForm';
 
 
 const Main = () => {
@@ -12,6 +14,8 @@ const Main = () => {
     <div className="main__wrapper">
       <Header></Header>
       {popupState.isUserMenuOpen && isMobileSized && <UserMenu isDark={false} />}
+      <PageTitle />
+      <SearchForm />
     </div>
   );
 };

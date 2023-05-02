@@ -3,10 +3,17 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
-    position: relative;
     display: flex;
     gap: 17px;
     justify-content: center;
+    width: fit-content;
+    position: relative;
+    color: white;
+}
+
+.navbar__text_with-bubble {
+    height: min-content;
+    align-self: center;
 }
 
 .navbar__text_with-bubble::after {
