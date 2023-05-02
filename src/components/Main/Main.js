@@ -5,6 +5,7 @@ import UserMenu from '../UserMenu/UserMenu';
 import useWindowSize from '../../hooks/UseWindowSize';
 import PageTitle from '../PageTitle/PageTitle';
 import SearchForm from '../SearchForm/SearchForm';
+import SearchResults from '../SearchResults/SearchResults';
 
 
 const Main = () => {
@@ -16,6 +17,7 @@ const Main = () => {
       {popupState.isUserMenuOpen && isMobileSized && <UserMenu isDark={false} />}
       <PageTitle />
       <SearchForm />
+      <SearchResults />
     </div>
   );
 };
