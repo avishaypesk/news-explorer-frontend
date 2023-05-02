@@ -1,6 +1,6 @@
 import Hamburger from '../Hamburger/Hamburger';
 import useWindowSize from '../../hooks/UseWindowSize';
-import './Navbar.css';
+import './NavBar.css';
 import NavItems from '../NavItems/NavItems.js';
 
 const Navbar = ({ isDark }) => {

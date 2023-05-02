@@ -3,7 +3,6 @@ Main {
 }
 
 .main__wrapper {
-  min-height: 100vh;
   background: url('../../images/bg-phone.png') no-repeat;
   position: relative;
 }

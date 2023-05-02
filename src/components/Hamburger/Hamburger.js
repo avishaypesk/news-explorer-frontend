@@ -1,5 +1,5 @@
 import './Hamburger.css';
-import { popupActions } from '../../utils/reducers/popupReducer';
+import { popupActions } from '../../reducers/popupReducer';
 import { usePopups } from '../../contexts/PopupContext';
 
 const Hamburger = ({ isDark }) => {
