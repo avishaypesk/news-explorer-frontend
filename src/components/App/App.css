@@ -1,10 +1,5 @@
-.App {
-    text-align: center;
-    background-color: #282c34;
-    min-height: 100vh;
-}
-
 .app {
     max-width: 1440px;
     margin: auto;
+    color: #1a1b22;
 }
