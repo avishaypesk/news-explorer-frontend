@@ -14,7 +14,7 @@ Main {
   }
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 650px) {
   .main__wrapper {
     background: url('../../images/bg.png') no-repeat;
     background-position: top center;
@@ -22,7 +22,7 @@ Main {
   }
 }
 
-@media screen and (min-width: 321px) {
+@media screen and (min-width: 350px) {
   .main__wrapper {
     background: url('../../images/bg.png') no-repeat;
     background-position: top center;
