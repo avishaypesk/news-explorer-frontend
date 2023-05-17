@@ -1,27 +1,24 @@
 .user-menu__overlay {
-    height: 100vh;
+    height: 110vh;
     width: 100%;
     background-color: black;
     opacity: 0.5;
-    position: absolute;
+    position: fixed;
+    z-index: 1;
+    top: -60px;
 }
 
 .user-menu {
-    background-color: #1A1B22;
+    background-color: #1a1b22;
     color: white;
     padding: 16px 16px 24px 16px;
     margin: 0;
     display: flex;
     flex-direction: column;
     position: absolute;
+    z-index: 2;
     gap: 22px;
     width: 100%;
-}
-
-.user-menu_dark {
-    background-color: white;
-    color: #1A1B22;
-
 }
 
 .user-menu .navbar__link {
@@ -40,4 +37,9 @@
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+}
+
+.user-menu_dark {
+    background-color: #ffffff;
+    color: #1a1b22;
 }

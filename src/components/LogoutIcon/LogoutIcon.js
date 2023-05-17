@@ -2,9 +2,10 @@ import LogoutIconWhite from '../../images/logout-white.svg';
 import LogoutIconBlack from '../../images/logout.svg';
 import './LogoutIcon.css';
 
-const LogoutIcon = ({ isDark }) => {
+const LogoutIcon = ({ isDark, marginLeft, styles }) => {
   return (
     <img
+      style={styles}
       className="navbar__logout-icon"
       src={isDark ? LogoutIconBlack : LogoutIconWhite}
       alt="Logout"

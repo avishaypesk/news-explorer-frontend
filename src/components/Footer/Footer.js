@@ -2,7 +2,6 @@ import './Footer.css';
 import { Link } from 'react-router-dom';
 import linkedIn from '../../images/linkedin.svg';
 import github from '../../images/github.svg';
-import facebook from '../../images/fb.svg';
 
 const Footer = () => {
   return (
@@ -13,11 +12,6 @@ const Footer = () => {
             <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
               Home
             </Link>
-          </li>
-          <li>
-            <a className="footer__page-link" href="https://omriruvio.com" target={'_blank'} rel="noreferrer">
-              My Homepage
-            </a>
           </li>
         </ul>
         <ul className="footer__social-links">
