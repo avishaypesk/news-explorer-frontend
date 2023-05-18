@@ -3,6 +3,7 @@ import NewsCard from '../NewsCard/NewsCard';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 import { useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
+import ArticlesSection from '../ArticlesSection/ArticlesSection';
 
 
 const exampleCards = [
@@ -65,7 +66,6 @@ const SearchResults = () => {
     };
 
     const handleGetNextCards = () => {
-        // temporary fake loading time
         new Promise((reslove) => {
             setIsLoading(true);
             setTimeout(reslove, 1500);
@@ -83,12 +83,13 @@ const SearchResults = () => {
     }, [displaySets]);
 
     return (
-        <section className="search-results">
-            {displaySets !== 0 && <h2 className="search-results__title">Search results</h2>}
-            <ul className="search-results__article-container">{displayCards}</ul>
-            {!isLoading && /* displaySets !== 0 && */ <ShowMoreButton getNextCards={handleGetNextCards} />}
+        /* displaySets !== 0 && */
+        <ArticlesSection>
+            {displaySets !== 0 && <h2 className="results__title">Search results</h2>}
+            <ul className="results__article-container">{displayCards}</ul>
+            {!isLoading && <ShowMoreButton getNextCards={handleGetNextCards} />}
             {isLoading && <Preloader />}
-        </section>
+        </ArticlesSection>
     );
 };
 
