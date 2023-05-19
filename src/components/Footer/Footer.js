@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="footer">
       <nav className="footer__nav-wrapper">
         <ul className="footer__page-links">
-          <li className="footer__page-link">
+          <li className="footer__page-link hover-fade">
             <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
               Home
             </Link>
@@ -16,12 +16,12 @@ const Footer = () => {
         </ul>
         <ul className="footer__social-links">
           <li>
-            <a className="footer__social-link" href="https://github.com/avishaypesk" target={'_blank'} rel="noreferrer">
+            <a className="footer__social-link hover-fade" href="https://github.com/avishaypesk" target={'_blank'} rel="noreferrer">
               <img className="footer__social-link-image" src={github} alt="Github icon"></img>
             </a>
           </li>
           <li>
-            <a className="footer__social-link" href="https://www.linkedin.com/in/avishay-peskin-127779219/" target={'_blank'} rel="noreferrer">
+            <a className="footer__social-link hover-fade" href="https://www.linkedin.com/in/avishay-peskin-127779219/" target={'_blank'} rel="noreferrer">
               <img className="footer__social-link-image" src={linkedIn} alt="LinkedIn icon"></img>
             </a>
           </li>

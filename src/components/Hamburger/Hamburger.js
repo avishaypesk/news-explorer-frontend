@@ -1,14 +1,23 @@
 import './Hamburger.css';
 import { popupActions } from '../../reducers/popupReducer';
 import { usePopups } from '../../contexts/PopupContext';
+import { useLocation, useNavigate } from 'react-router';
 
-const Hamburger = ({ isDark }) => {
-  const burgerClassName = `hamburger ${isDark ? 'hamburger_dark' : ''}`;
-  const closeButtonClassName = `close-button ${isDark ? 'close-button_dark' : ''}`;
+const Hamburger = () => {
+  const locationIsArticles = useLocation().pathname === '/saved-articles';
+  const burgerClassName = `hamburger ${locationIsArticles ? 'hamburger_dark' : ''}`;
+  const crossClassName = `close-button ${locationIsArticles ? 'close-button_dark' : ''}`;
   const [popupState, popupDispatch] = usePopups();
-  const displayButton = () => (popupState.isUserMenuOpen ? closeButtonClassName : burgerClassName);
+  const displayButton = () => (popupState.isUserMenuOpen ? crossClassName : burgerClassName);
+  const navigate = useNavigate();
 
-  return <button onClick={() => popupDispatch(popupActions.toggleUserMenu)} className={displayButton()}></button>;
+  const handleBurgerClick = () => {
+    if (!locationIsArticles) {
+      popupDispatch(popupActions.toggleUserMenu);
+    } else navigate('/', { replace: true });
+  };
+
+  return <button onClick={handleBurgerClick} className={displayButton()}></button>;
 };
 
 export default Hamburger;

@@ -1,5 +1,5 @@
-import './savedArticles.css';
-import { useEffect, useState } from 'react';
+import './SavedArticles.css';
+import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 
 const SavedNewsHeader = () => {

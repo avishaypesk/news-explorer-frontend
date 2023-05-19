@@ -7,6 +7,7 @@
   padding: 0 16px;
   position: relative;
   z-index: 2;
+  border-bottom: #ffffff33 1px solid;
 }
 
 .header_dark {
@@ -16,13 +17,13 @@
 @media screen and (min-width: 1000px) {
   .header {
     height: 80px;
-    margin: 0 104px;
+    padding: 0 104px;
   }
 }
 
 @media screen and (min-width: 650px) {
   .header {
     height: 66px;
-    margin: 0 40px;
+    padding: 0 40px;
   }
 }

@@ -23,7 +23,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/saved-articles" element={<Articles isDark />} />
+        <Route path="/saved-articles" element={<Articles />} />
       </Routes>
       <Footer />
     </div>

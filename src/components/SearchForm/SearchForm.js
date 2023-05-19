@@ -1,10 +1,15 @@
 import './SearchForm.css';
 
-const SearchForm = ({ buttonText = 'Search' }) => {
+const SearchForm = ({ buttonText = 'Search', handleSearch }) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // handleSearch(cards);
+    };
+
     return (
         <>
-            <form className="search-form">
-                <input className="search-form__input" type={'search'} placeholder=""></input>
+            <form onSubmit={handleSubmit} className="search-form">
+                <input className="search-form__input" type={'search'} placeholder="Nature"></input>
                 <button className="search-form__submit" type={'submit'}>
                     {buttonText}
                 </button>

@@ -1,34 +1,30 @@
 import './Header.css';
 import Logo from '../Logo/Logo';
 import Navbar from '../NavBar/NavBar';
-import HeaderLine from '../HeaderLine/HeaderLine';
 import { usePopups } from '../../contexts/PopupContext';
-import { useAuth } from '../../contexts/AuthContext';
 import useWindowSize from '../../hooks/UseWindowSize';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 
-const Header = ({ isDark }) => {
-  const [popupState, popupDispatch] = usePopups();
+const Header = () => {
+  const [popupState] = usePopups();
   const [headerClassName, setHeaderClassName] = useState('header');
   const isMobileSized = useWindowSize().width < 650;
-  const { currentUser } = useAuth();
+  const isSavedArticles = useLocation().pathname === '/saved-articles';
 
   useEffect(() => {
-    if (isMobileSized && !isDark) {
+    if (isMobileSized && !isSavedArticles) {
       setHeaderClassName(`header ${popupState.isUserMenuOpen ? 'header_dark' : ''}`);
     } else {
       setHeaderClassName('header');
     }
-  }, [isMobileSized, popupState.isUserMenuOpen, isDark]);
+  }, [isMobileSized, popupState.isUserMenuOpen, isSavedArticles]);
 
   return (
-    <>
-      <div className={headerClassName}>
-        <Logo isDark={isDark} />
-        <Navbar isDark={isDark} />
-      </div>
-      <HeaderLine isDark={isDark} />
-    </>
+    <div className={headerClassName}>
+      <Logo />
+      <Navbar />
+    </div>
   );
 };
 
