@@ -1,7 +1,6 @@
 import './UserMenu.css';
 import NavItem from '../NavItem/NavItem';
-import { usePopups } from '../../contexts/PopupContext';
-import { popupActions } from '../../reducers/popupReducer';
+import { usePopups, popupActions } from '../../contexts/PopupContext';
 import { useAuth } from '../../contexts/AuthContext';
 import LogoutIcon from '../LogoutIcon/LogoutIcon';
 import { useLocation } from 'react-router';
@@ -22,11 +21,9 @@ const UserMenu = () => {
             <ul className="user-menu">
                 <NavItem noDecoration text={displayPath} path={routeToPath} />
                 {currentUser.isLoggedIn ? (
-                    <>
-                        <NavItem signoutButton hasBubble isLarge text={currentUser.name}>
-                            <LogoutIcon styles={{ marginLeft: '1rem' }} />
-                        </NavItem>
-                    </>
+                    <NavItem signoutButton hasBubble isLarge text={currentUser.name}>
+                        <LogoutIcon styles={{ marginLeft: '1rem' }} />
+                    </NavItem>
                 ) : (
                     !isSavedArticles && <NavItem signinButton noDecoration text="Sign in" hasBubble isLarge></NavItem>
                 )}

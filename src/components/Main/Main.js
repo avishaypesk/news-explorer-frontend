@@ -1,7 +1,6 @@
 import './Main.css';
 import { useState } from 'react';
 import Header from '../Header/Header';
-import { usePopups } from '../../contexts/PopupContext';
 import UserMenu from '../UserMenu/UserMenu';
 import useWindowSize from '../../hooks/UseWindowSize';
 import PageTitle from '../PageTitle/PageTitle';
@@ -9,7 +8,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import SearchResults from '../SearchResults/SearchResults';
 import AboutMe from '../AboutMe/AboutMe';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
-import { popupActions } from '../../reducers/popupReducer';
+import { usePopups, popupActions } from '../../contexts/PopupContext';
 import { useAuth } from '../../contexts/AuthContext';
 import AuthForm from '../AuthForm/AuthForm';
 import NothingFound from '../NothingFound/NothingFound';
@@ -22,25 +21,30 @@ const Main = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [nothingFound, setNothingFound] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
+
   const showSignUp = () => {
     popupDispatch(popupActions.closeAll);
     popupDispatch(popupActions.openSignUpPopup);
   };
+
   const showSignIn = () => {
     popupDispatch(popupActions.closeAll);
     popupDispatch(popupActions.openSignInPopup);
   };
+
   const handleSignup = () => {
     popupDispatch(popupActions.openSuccessPopup);
     popupDispatch(popupActions.closeSignUpPopup);
   };
+
   const handleSignin = () => {
+    // temporary pre APIs
     signIn('Elise');
     popupDispatch(popupActions.closeSignInPopup);
   };
 
   const handleSearchSubmit = (results) => {
+    // temporary pre APIs
     setIsSearching(true);
     setNothingFound(false);
     setSearchResults([]);
@@ -56,42 +60,47 @@ const Main = () => {
     });
   };
 
-
   return (
     <>
-      <PopupWithForm
-        isOpen={popupState.isSigninPopupOpen}
-        onSubmit={handleSignin}
-        isValid={true}
-        name="signin"
-        title="Sign in"
-        buttonText="Sign in"
-        redirectText="Sign up"
-        handleRedirect={showSignUp}
-      >
-        <AuthForm />
-
-      </PopupWithForm>
-      <PopupWithForm
-        isOpen={popupState.isSignupPopupOpen}
-        onSubmit={handleSignup}
-        isValid={true}
-        name="signup"
-        title="Sign up"
-        buttonText="Sign up"
-        redirectText="Sign in"
-        handleRedirect={showSignIn}
-      >
-        <AuthForm />
-      </PopupWithForm>
-      <PopupWithForm
-        hideForm={true}
-        name="success"
-        isOpen={popupState.isSuccessPopupOpen}
-        title="Registration successfully completed!"
-        redirectText="Sign in"
-        handleRedirect={showSignIn}
-      ></PopupWithForm>
+      {popupState.isSigninPopupOpen && (
+        <PopupWithForm
+          isOpen={popupState.isSigninPopupOpen}
+          onSubmit={handleSignin}
+          isValid={true}
+          formName="signin"
+          title="Sign in"
+          buttonText="Sign in"
+          redirectText="Sign up"
+          handleRedirect={showSignUp}
+        >
+          <AuthForm />
+        </PopupWithForm>
+      )}
+      {popupState.isSignupPopupOpen && (
+        <PopupWithForm
+          withNameField
+          isOpen={popupState.isSignupPopupOpen}
+          onSubmit={handleSignup}
+          isValid={true}
+          formName="signup"
+          title="Sign up"
+          buttonText="Sign up"
+          redirectText="Sign in"
+          handleRedirect={showSignIn}
+        >
+          <AuthForm />
+        </PopupWithForm>
+      )}
+      {popupState.isSuccessPopupOpen && (
+        <PopupWithForm
+          hideForm={true}
+          formName="success"
+          isOpen={popupState.isSuccessPopupOpen}
+          title="Registration successfully completed!"
+          redirectText="Sign in"
+          handleRedirect={showSignIn}
+        ></PopupWithForm>
+      )}
       <div className="main__wrapper">
         <Header />
         {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}

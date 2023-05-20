@@ -3,7 +3,7 @@ import NewsCard from '../NewsCard/NewsCard';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 import { useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
-import ArticlesSection from '../ArticlesSection/ArticleSection';
+import ArticlesSection from '../ArticlesSection/ArticlesSection';
 
 const SearchResults = ({ isSearching, searchResults }) => {
     const [displaySets, setDisplaySets] = useState(0);

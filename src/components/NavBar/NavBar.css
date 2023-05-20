@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     height: 100%;
-    color: #ffffff;
+    color: white;
     gap: 16px;
 }
 
