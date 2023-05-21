@@ -40,13 +40,11 @@
     justify-content: center;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.7s, opacity 0.7s linear;
 }
 
 .popup_active {
     visibility: visible;
     opacity: 1;
-    transition: visibility 0.7s, opacity 0.7s;
 }
 
 .popup__window {
@@ -88,7 +86,6 @@
 }
 
 @media screen and (min-width: 650px) {
-
     .form__submit-button {
         margin-top: 39px;
     }

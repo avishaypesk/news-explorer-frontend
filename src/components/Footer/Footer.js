@@ -8,10 +8,8 @@ const Footer = () => {
     <footer className="footer">
       <nav className="footer__nav-wrapper">
         <ul className="footer__page-links">
-          <li className="footer__page-link hover-fade">
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
-              Home
-            </Link>
+          <li className="hover-fade">
+          <Link to={'/'} className='footer__page-link'>Home</Link>
           </li>
         </ul>
         <ul className="footer__social-links">
