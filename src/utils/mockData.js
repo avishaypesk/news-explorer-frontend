@@ -1,0 +1,126 @@
+export const allCards = [
+  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },
+  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },  {
+    keyword: 'Nature',
+    title: 'What is Lorem Ipsum?',
+    text:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+    date: 'November 4, 2023',
+    source: 'treehugger',
+    link: '#',
+    image: 'https://vastphotos.com/files/uploads/photos/10557/moraine-lake-photo-l.jpg?v=20220712073521',
+    owner: 'AvishayPesk',
+    isSaved: false,
+    _id: Math.random().toString(),
+  },
+];
+
+export const savedCards = allCards.slice(1);

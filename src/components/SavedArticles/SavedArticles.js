@@ -1,22 +1,16 @@
-import './SavedArticles.css';
-import { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import React from 'react';
+import NewsCardsList from '../NewsCardsList/NewsCardsList';
 
-const SavedNewsHeader = () => {
-    const { currentUser } = useAuth();
-    const [savedArticles, setSavedArticles] = useState([]);
-    const [keywords, setKeywords] = useState('');
-
+const SavedArticles = (props) => {
     return (
-        <section className="saved-articles-info">
-            <h2 className="saved-articles-info__header">Saved articles</h2>
-            <span className="saved-articles-info__article-count">
-                {currentUser.name || 'Elise'} you have {savedArticles.length} saved articles
-            </span>
-            <span className="saved-articles-info__keywords">By keywords: </span>
-            <span className="saved-articles-info__keywords saved-articles-info__keywords_bold">{keywords}</span>
+        <section className='saved-news'>
+            <NewsCardsList
+                cards={props.cards}
+                isLoggedIn={props.isLoggedIn}
+                SavedArticles={true}
+            />
         </section>
     );
 };
 
-export default SavedNewsHeader;
+export default SavedArticles;

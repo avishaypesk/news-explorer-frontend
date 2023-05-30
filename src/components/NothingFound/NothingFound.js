@@ -1,14 +1,15 @@
-import './NothingFound.css';
-import notFound from '../../images/not-found.svg';
+import React from 'react';
 
-const NothingFound = () => {
+const NotFound = () => {
     return (
-        <section className="nothing-found__container">
-            <img className="nothing-found__image" src={notFound} alt="Nothing Found"></img>
-            <span className="nothing-found__title">Nothing found</span>
-            <span className="nothing-found__text">Sorry, but nothing matched your search terms.</span>
-        </section>
+        <div className='not-found'>
+            <div className='not-found__icon'></div>
+            <h3 className='not-found__title'>Nothing found</h3>
+            <p className='not-found__text'>
+                Sorry, but nothing matched your search terms.
+            </p>
+        </div>
     );
 };
 
-export default NothingFound;
+export default NotFound;

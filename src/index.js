@@ -1,21 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './components/App/App';
-import { BrowserRouter } from 'react-router-dom';
-import { PopupProvider } from './contexts/PopupContext';
-import { initialPopupState, popupReducer } from './reducers/popupReducer';
-import { AuthProvider } from './contexts/AuthContext';
+import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const rootElement = document.getElementById('root');
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <PopupProvider initialState={initialPopupState} reducer={popupReducer}>
-          <App />
-        </PopupProvider>
-      </AuthProvider>
-    </BrowserRouter>
+      <App />
   </React.StrictMode>
 );
+
+reportWebVitals();

@@ -1,26 +1,6 @@
-.main__wrapper {
-  background: url('../../images/bg-phone.png') no-repeat;
-  position: relative;
-}
-
-@media screen and (min-width: 1000px) {
-  .main__wrapper {
-    background-position: top center;
-    background-size: auto;
-  }
-}
-
-@media screen and (min-width: 650px) {
-  .main__wrapper {
-    background: url('../../images/bg.png') no-repeat;
-    background-position: top center;
-    background-size: auto 400px;
-  }
-}
-
-@media screen and (min-width: 350px) {
-  .main__wrapper {
-    background: url('../../images/bg.png') no-repeat;
-    background-position: top center;
-  }
+.main {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }

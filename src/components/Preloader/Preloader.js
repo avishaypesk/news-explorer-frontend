@@ -1,5 +1,3 @@
-import './Preloader.css';
-
 const Preloader = ({ text }) => {
     return (
         <section className="preloader_container">
