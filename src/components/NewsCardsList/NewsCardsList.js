@@ -1,16 +1,16 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 
 const NewsCardsList = (props) => {
-    // const [count, setCount] = useState(3);
+    const [count, setCount] = useState(3);
 
     const renderNewsCards = () => {
         if (props.cards && props.cards.length > 0) {
-            const slicedCards = props.cards.slice(0, 3);
+            const slicedCards = props.cards.slice(0, count);
 
             return slicedCards.map((card, index) => (
                 <NewsCard
-                SavedArticles={props.SavedArticles}
+                    SavedArticles={props.SavedArticles}
                     isLoggedIn={props.isLoggedIn}
                     key={card._id}
                     card={card}
@@ -22,6 +22,10 @@ const NewsCardsList = (props) => {
         return null;
     };
 
+    const handleShowMore = () => {
+        setCount(count + 3);
+    };
+
     return (
         <section className='news-card-list'>
             <div className='news-card-list__wrapper'>
@@ -29,11 +33,14 @@ const NewsCardsList = (props) => {
 
                 <ul className='news-card-list__container'>{renderNewsCards()}</ul>
 
-                {!props.isSavedRoute ? <button className='news-card-list__show-more'>Show more{/* onClick={() => setCount(count + 3)} */}</button> : null}
+                {!props.isSavedRoute ? (
+                    <button className='news-card-list__show-more' onClick={handleShowMore}>
+                        Show more
+                    </button>
+                ) : null}
             </div>
         </section>
     );
 };
 
 export default NewsCardsList;
-

@@ -81,7 +81,7 @@
     opacity: 1;
 }
 
-.news-card__save-button-label {
+.news-card__button-label {
     opacity: 0;
     visibility: hidden;
     position: absolute;
@@ -102,17 +102,12 @@
     line-height: 14px;
 }
 
-.news-card__save-button-label p {
+.news-card__button-label p {
     margin: 0 auto;
 }
 
-.news-card__save-button:hover .news-card__save-button-label {
-    transition: opacity .3s linear;
-    opacity: 1;
-    visibility: visible;
-}
-
-.news-card__delete-button:hover .news-card__save-button-label {
+.news-card__save-button:hover .news-card__button-label,
+.news-card__delete-button:hover .news-card__button-label {
     transition: opacity .3s linear;
     opacity: 1;
     visibility: visible;

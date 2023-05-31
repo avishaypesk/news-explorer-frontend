@@ -1,11 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import validator from 'validator';
 
 const PopupWithForm = (props) => {
+
+    const [isFormValid, setIsFormValid] = useState(false);
     const [formErrors, setFormErrors] = useState({});
+
     const emailRef = useRef();
     const passwordRef = useRef();
     const usernameRef = useRef();
+
+    useEffect(() => {
+        setIsFormValid(false);
+    }, []);
 
     function handleRegisterSubmit(e) {
         e.preventDefault();
@@ -57,6 +64,9 @@ const PopupWithForm = (props) => {
 
         const validatedInputs = validateInputs(email, password, username);
         setFormErrors(validatedInputs);
+
+        const isFieldsEmpty = Object.values(formErrors).every(value => !value);
+        setIsFormValid(isFieldsEmpty);
     }
 
     function closePopup() {
@@ -76,6 +86,8 @@ const PopupWithForm = (props) => {
     function renderForm() {
         const { isRegisterPopup } = props;
         const formType = isRegisterPopup ? 'Sign up' : 'Sign in';
+
+        const submitButtonClassName = `popup__submit ${isFormValid && Object.values(formErrors).every(value => !value) ? 'popup__submit_active' : ''}`;
 
         return (
             <>
@@ -130,7 +142,7 @@ const PopupWithForm = (props) => {
 
                     <button
                         type='submit'
-                        className={`popup__submit ${Object.keys(formErrors).length === 0 ? 'popup__submit_active' : ''}`}
+                        className={submitButtonClassName}
                     >
                         {formType}
                     </button>

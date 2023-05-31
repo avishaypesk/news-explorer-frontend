@@ -4,25 +4,29 @@ const NewsCard = (props) => {
     const [isSaved, setIsSaved] = useState(false);
 
     const toggleDeleteSave = () => {
-        if (props.isSavedNews && props.isLoggedIn) {
+        if (props.SavedArticles && props.isLoggedIn) {
             return (
                 <button className='news-card__delete-button'>
-                    <span className='news-card__save-button-label'>
+                    <span className='news-card__button-label'>
                         <p>Remove from saved</p>
                     </span>
                 </button>
             );
-        } else if (!props.isSavedNews && props.isLoggedIn) {
+        } else if (!props.SavedArticles && props.isLoggedIn) {
             return (
                 <button
                     className={`news-card__save-button ${isSaved ? 'news-card__save-button_active' : ''}`}
                     onClick={() => setIsSaved(!isSaved)}
-                ></button>
+                >
+                    <span className='news-card__button-label'>
+                        <p>{isSaved ? 'Saved' : 'Save'}</p>
+                    </span>
+                </button>
             );
         } else {
             return (
                 <button className='news-card__save-button'>
-                    <span className='news-card__save-button-label'>
+                    <span className='news-card__button-label'>
                         <p>Sign in to save articles</p>
                     </span>
                 </button>
@@ -31,7 +35,7 @@ const NewsCard = (props) => {
     };
 
     const renderKeywords = () => {
-        if (props.isSavedNews) {
+        if (props.SavedArticles) {
             return (
                 <div className='news-card__keyword'>
                     <p>{props.card.keyword[0].toUpperCase() + props.card.keyword.slice(1)}</p>
