@@ -1,45 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
+import Preloader from '../Preloader/Preloader';
+import './NewsCardsList.css';
 
-const NewsCardsList = (props) => {
-    const [count, setCount] = useState(3);
+const INITIAL_COUNT = 3;
 
-    const renderNewsCards = () => {
-        if (props.cards && props.cards.length > 0) {
-            const slicedCards = props.cards.slice(0, count);
+const NewsCardsList = ({ cards = [], SavedArticles, isLoggedIn }) => {
+    const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+    const [isLoading, setIsLoading] = useState(false);
 
-            return slicedCards.map((card, index) => (
-                <NewsCard
-                    SavedArticles={props.SavedArticles}
-                    isLoggedIn={props.isLoggedIn}
-                    key={card._id}
-                    card={card}
-                    index={index}
-                />
-            ));
-        }
+    const incrementVisibleCount = useCallback(() => {
+        setIsLoading(true);
+        setTimeout(() => {
+            setVisibleCount(visibleCount + INITIAL_COUNT);
+            setIsLoading(false);
+        }, 1000);
+    }, [visibleCount]);
 
-        return null;
-    };
-
-    const handleShowMore = () => {
-        setCount(count + 3);
-    };
+    const visibleCards = cards.slice(0, visibleCount);
 
     return (
-        <section className='news-card-list'>
-            <div className='news-card-list__wrapper'>
-                {!props.SavedArticles ? <h2 className='news-card-list__title'>Search results</h2> : null}
+        <div className='news-card-list'>
+            <div className='news-card-list__container'>
+                {!SavedArticles && <h2 className='news-card-list__title'>Search results</h2>}
 
-                <ul className='news-card-list__container'>{renderNewsCards()}</ul>
+                <div className='news-card-list__grid'>
+                    {visibleCards.map((card) => (
+                        <NewsCard
+                            isLoggedIn={isLoggedIn}
+                            SavedArticles={SavedArticles}
+                            card={card}
+                        />
+                    ))}
+                </div>
 
-                {!props.isSavedRoute ? (
-                    <button className='news-card-list__show-more' onClick={handleShowMore}>
+                {isLoading ? (
+                    <Preloader text="Searching for more news..." />
+                ) : (
+                    <button className='news-card-list__more-button' onClick={incrementVisibleCount}>
                         Show more
                     </button>
-                ) : null}
+                )}
             </div>
-        </section>
+        </div>
     );
 };
 

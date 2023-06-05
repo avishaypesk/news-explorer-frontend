@@ -1,18 +1,18 @@
 import React from 'react';
 import './AboutMe.css';
 
-const About = () => {
+const AboutMe = () => {
     return (
-        <section className="about">
-            <img className="about-__image" alt="Avishay Peskin"></img>
-            <div className="about__info-wrapper">
-                <h2 className="about__title">About the author</h2>
-                <p className="about__info">
-                    {"Hi, I'm Avishay Peskin, a full-stack web developer focused on React & Node. This is the final project at the Pracicum course."}
+        <section className="about-me">
+            <img className="about-me__image" alt="Avishay Peskin" src="" />
+            <div className="about-me__container">
+                <h2 className="about-me__title">About the author</h2>
+                <p className="about-me__text">
+                    Hi, I'm Avishay Peskin, a full-stack web developer with a focus on React and Node. This project serves as my final assignment for the Practicum course.
                 </p>
             </div>
         </section>
     );
 };
 
-export default About;
+export default AboutMe;

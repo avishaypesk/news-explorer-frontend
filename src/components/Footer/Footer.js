@@ -1,31 +1,31 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import linkedIn from '../../images/linkedin.svg';
 import github from '../../images/github.svg';
+import './Footer.css';
+import AboutMe from '../AboutMe/AboutMe';
 
-const Footer = () => {
+function Footer({ showAboutMe }) {
   return (
-    <footer className="footer">
-      <nav className="footer__nav-wrapper">
-        <ul className="footer__page-links">
-          <li className="hover-fade">
-          <Link to={'/'} className='footer__page-link'>Home</Link>
-          </li>
-        </ul>
-        <ul className="footer__social-links">
-          <li>
-            <a className="footer__social-link hover-fade" href="https://github.com/avishaypesk" target={'_blank'} rel="noreferrer">
-              <img className="footer__social-link-image" src={github} alt="Github icon"></img>
+    <>
+      {showAboutMe && <AboutMe />}
+      <footer className="footer">
+        <div className="footer__container">
+          <p className="footer__copyright"> © {new Date().getFullYear()} Supersite, Powered by News API</p>
+          <div className="footer__links">
+            <NavLink exact to="/" className="footer__link">Home</NavLink>
+            <a className="footer__link" href="https://practicum.yandex.com/web/">Practicum</a>
+          </div>
+          <div className="footer__icons">
+            <a href="https://github.com/avishaypesk" target={'_blank'} rel="noreferrer">
+              <img className="footer__icon" src={github} alt="GitHub link" ></img>
             </a>
-          </li>
-          <li>
-            <a className="footer__social-link hover-fade" href="https://www.linkedin.com/in/avishay-peskin-127779219/" target={'_blank'} rel="noreferrer">
-              <img className="footer__social-link-image" src={linkedIn} alt="LinkedIn icon"></img>
+            <a href="https://www.linkedin.com/in/avishay-peskin-127779219/" target={'_blank'} rel="noreferrer">
+              <img className="footer__icon" src={linkedIn} alt="LinkedIn link" ></img>
             </a>
-          </li>
-        </ul>
-      </nav>
-      <span className="footer__copyright">&copy; {new Date().getFullYear()} News Explorer, Powered by News API</span>
-    </footer>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 };
 

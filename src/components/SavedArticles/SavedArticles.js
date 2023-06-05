@@ -1,12 +1,13 @@
 import React from 'react';
 import NewsCardsList from '../NewsCardsList/NewsCardsList';
+import './SavedArticles.css'
 
-const SavedArticles = (props) => {
+const SavedArticles = ({ cards, isLoggedIn }) => {
     return (
-        <section className='saved-news'>
+        <section className='saved-articles'>
             <NewsCardsList
-                cards={props.cards}
-                isLoggedIn={props.isLoggedIn}
+                cards={cards}
+                isLoggedIn={isLoggedIn}
                 SavedArticles={true}
             />
         </section>

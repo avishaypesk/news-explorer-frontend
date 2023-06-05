@@ -1,30 +1,21 @@
-import React, { useState } from 'react';
-import SearchForm from '../SearchForm/SearchForm';
-import About from '../AboutMe/AboutMe';
+import React from 'react';
 import NewsCardsList from '../NewsCardsList/NewsCardsList';
-import Preloader from '../Preloader/Preloader';
-import NothingFound from '../NothingFound/NothingFound';
 
-const Main = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
+import './Main.css';
+
+const Main = ({ cards, isLoggedIn }) => {
 
   return (
-    <div className='main'>
-      <SearchForm setIsLoading={setIsLoading} />
-      {isLoading ? (
-        <>
-          <Preloader />
-          <NothingFound />
-        </>
-      ) : (
+    <>
+      <main className='main'>
         <NewsCardsList
-          cards={props.cards}
+          isLoggedIn={isLoggedIn}
+          cards={cards}
           SavedArticles={false}
-          isLoggedIn={props.isLoggedIn}
         ></NewsCardsList>
-      )}
-      <About />
-    </div>
+      </main>
+    </>
+
   );
 };
 

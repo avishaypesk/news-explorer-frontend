@@ -1,63 +1,50 @@
 import React, { useState } from 'react';
+import './NewsCard.css';
 
-const NewsCard = (props) => {
-    const [isSaved, setIsSaved] = useState(false);
+const Newscard = ({ card, isLoggedIn, SavedArticles }) => {
+    
+    const [isSaved, setIsSaved] = useState(SavedArticles);
 
-    const toggleDeleteSave = () => {
-        if (props.SavedArticles && props.isLoggedIn) {
-            return (
-                <button className='news-card__delete-button'>
-                    <span className='news-card__button-label'>
-                        <p>Remove from saved</p>
-                    </span>
-                </button>
-            );
-        } else if (!props.SavedArticles && props.isLoggedIn) {
-            return (
-                <button
-                    className={`news-card__save-button ${isSaved ? 'news-card__save-button_active' : ''}`}
-                    onClick={() => setIsSaved(!isSaved)}
-                >
-                    <span className='news-card__button-label'>
-                        <p>{isSaved ? 'Saved' : 'Save'}</p>
-                    </span>
-                </button>
-            );
-        } else {
-            return (
-                <button className='news-card__save-button'>
-                    <span className='news-card__button-label'>
-                        <p>Sign in to save articles</p>
-                    </span>
-                </button>
-            );
+    const handleSave = () => {
+        if (isLoggedIn && !SavedArticles) {
+            setIsSaved(!isSaved);
         }
     };
 
-    const renderKeywords = () => {
-        if (props.SavedArticles) {
-            return (
-                <div className='news-card__keyword'>
-                    <p>{props.card.keyword[0].toUpperCase() + props.card.keyword.slice(1)}</p>
-                </div>
-            );
-        }
-        return null;
-    };
+    const showRemoveIcon = SavedArticles;
+
+    let ButtonIcon, ButtonLabel;
+
+    if (!isLoggedIn) {
+        ButtonIcon = <i className="news-card__bookmark-icon" />;
+        ButtonLabel = 'Sign in to save articles';
+    } else if (showRemoveIcon) {
+        ButtonIcon = <i className="news-card__remove-icon" />;
+        ButtonLabel = 'Remove from saved';
+    } else if (isSaved) {
+        ButtonIcon = <i className="news-card__saved-icon" />;
+        ButtonLabel = 'Saved';
+    } else {
+        ButtonIcon = <i onClick={handleSave} className="news-card__bookmark-icon" />;
+        ButtonLabel = 'Save';
+    }
 
     return (
-        <li className='news-card'>
-            {toggleDeleteSave()}
-            {renderKeywords()}
-            <img className='news-card__image' src={props.card.image} alt={props.card.title} />
-            <div className='news-card__info-container'>
-                <p className='news-card__date'>{props.card.date}</p>
-                <h3 className='news-card__title'>{props.card.title}</h3>
-                <p className='news-card__text'>{props.card.text}</p>
-                <cite className='news-card__source'>{props.card.source}</cite>
+        <div className="news-card">
+            <img className="news-card__image" src={card.image} alt={card.title} />
+            <div className="news-card__container" onClick={handleSave}>
+                <div className="news-card__label">{ButtonLabel}</div>
+                <div className="news-card__button">{ButtonIcon}</div>
             </div>
-        </li>
+            {SavedArticles && <p className="news-card__keyword">{card.keyword}</p>}
+            <div className="news-card__article">
+                <p className="news-card__date">{card.date}</p>
+                <p className="news-card__title">{card.title}</p>
+                <p className="news-card__text">{card.text}</p>
+                <p className="news-card__source">{card.source}</p>
+            </div>
+        </div>
     );
 };
 
-export default NewsCard;
+export default Newscard;
