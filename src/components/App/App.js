@@ -23,7 +23,7 @@ const App = () => {
 
   const [popupType, setPopupType] = useState('signIn');
 
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(true);
 
   const [searchSubmitted, setSearchSubmitted] = useState(false);
 

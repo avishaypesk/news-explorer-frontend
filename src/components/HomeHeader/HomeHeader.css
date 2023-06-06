@@ -36,6 +36,20 @@
   margin: 0;
 }
 
+
+
+@media screen and (max-width: 1150px) {
+
+  .header__container {
+    width: 550px
+  }
+
+  .header__title {
+    max-width: 100%;
+  }
+
+}
+
 @media screen and (max-width: 768px) {
 
   .header__container {
@@ -50,6 +64,22 @@
     margin: 38px 0 16px;
   }
 
+}
+
+@media screen and (max-width: 600px) {
+
+  .header__container {
+    align-items: center;
+    width: 100%;
+  }
+
+  .header__title {
+    width: 80%;
+  }
+
+  .header__subtitle {
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 320px) {

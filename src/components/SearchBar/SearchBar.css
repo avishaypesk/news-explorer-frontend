@@ -77,7 +77,23 @@
 
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
+
+  .searchbar {
+    padding: 48px 0;
+  }
+
+  .searchbar__button {
+    width: 160px;
+  }
+
+  .searchbar__input {
+    width: fit-content;
+  }
+
+}
+
+@media screen and (max-width: 350px) {
 
   .searchbar {
     padding: 104px 0 32px;
@@ -99,6 +115,7 @@
   .searchbar__input {
     width: 288px;
     height: 56px;
+    margin: auto;
     margin-bottom: 16px;
   }
 
