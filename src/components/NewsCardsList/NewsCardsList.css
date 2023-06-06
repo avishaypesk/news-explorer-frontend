@@ -82,7 +82,14 @@
 
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 650px) {
+
+    .news-card-list__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 450px) {
 
     .news-card-list {
         padding: 32px 0 24px;
