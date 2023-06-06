@@ -143,9 +143,14 @@
   cursor: pointer;
   color: #347efe;
   margin: 0;
+  background-color: transparent;
+  border: none;
 }
 
+.popup__link:focus,
 .popup__link:hover {
+  outline: none;
+  text-decoration: none;
   opacity: 0.8;
 }
 
@@ -157,6 +162,8 @@
     top: 56px;
     bottom: 0;
     padding: 16px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .popup__close-button {
@@ -165,6 +172,6 @@
     top: -30px;
     right: 10px;
     padding: 0;
-;
+    ;
   }
 }

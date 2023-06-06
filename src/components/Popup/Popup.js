@@ -32,7 +32,12 @@ const SignInForm = ({ onSubmit, changePopupType }) => {
             <FormField label="Email" type="email" placeholder="Enter email" minLength="7" value={email} onChange={e => setEmail(e.target.value)} errorMessage={emailError} />
             <FormField label="Password" type="password" placeholder="Enter password" minLength="5" value={password} onChange={e => setPassword(e.target.value)} errorMessage={passwordError} />
             <button type="submit" className={`popup__submit ${isValid ? "" : "popup__submit_disabled"}`} disabled={!isValid}>Sign in</button>
-            <p className="popup__change-type">or&nbsp;<span className="popup__link" onClick={() => changePopupType('signUp')}> Sign up</span></p>
+            <p className="popup__change-type">
+                or
+                <button className="popup__link" type="button" onClick={() => changePopupType('signUp')}>
+                    Sign up
+                </button>
+            </p>
         </form>
     );
 };
@@ -64,7 +69,12 @@ const SignUpForm = ({ onSubmit, changePopupType }) => {
             <FormField label="Password" type="password" placeholder="Enter password" minLength="5" value={password} onChange={e => setPassword(e.target.value)} errorMessage={passwordError} />
             <FormField label="Username" type="text" placeholder="Enter your username" minLength="2" value={username} onChange={e => setUsername(e.target.value)} errorMessage={usernameError} />
             <button type="submit" className={`popup__submit ${isValid ? "" : "popup__submit_disabled"}`} disabled={!isValid}>Sign up</button>
-            <p className="popup__change-type">or&nbsp;<span className="popup__link" onClick={() => changePopupType('signIn')}>Sign in</span></p>
+            <p className="popup__change-type">
+                or
+                <button className="popup__link" type="button" onClick={() => changePopupType('signIn')}>
+                    Sign in
+                </button>
+            </p>
         </form>
     );
 };

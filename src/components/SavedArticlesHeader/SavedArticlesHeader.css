@@ -20,8 +20,6 @@
 .saved-articles-header__by-keywords {
     color: #1A1B22;
     margin: 30px 0 0;
-    font-weight: 700;
-
 }
 
 .saved-articles-header__keywords {
@@ -39,6 +37,7 @@
     width: 530px;
     margin: 28px 0 0;
     font-family: 'Roboto-Slab', serif;
+    font-weight: 400;
     font-size: 40px;
     line-height: 46px;
 }
@@ -65,6 +64,7 @@
         margin: 16px 0 0;
         font-size: 30px;
         line-height: 34px;
+        max-width: 336px;
     }
 
     .saved-articles-header__by-keywords {

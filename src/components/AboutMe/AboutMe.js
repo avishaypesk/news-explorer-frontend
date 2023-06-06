@@ -1,10 +1,11 @@
 import React from 'react';
 import './AboutMe.css';
+import Avishay from '../../images/me.png'
 
 const AboutMe = () => {
     return (
         <section className="about-me">
-            <img className="about-me__image" alt="Avishay Peskin" src="" />
+            <img className="about-me__image" alt="Avishay Peskin" src={Avishay} />
             <div className="about-me__container">
                 <h2 className="about-me__title">About the author</h2>
                 <p className="about-me__text">

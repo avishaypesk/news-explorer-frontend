@@ -29,7 +29,7 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [savedArticleCount, setSavedArticleCount] = useState();
+  // const [savedArticleCount, setSavedArticleCount] = useState(); until api saves articles
 
   const handleChangePopupType = useCallback(() => {
     setPopupType(prevPopupType => (prevPopupType === 'signIn') ? 'signUp' : 'signIn');
@@ -84,7 +84,7 @@ const App = () => {
 
     return (
       <>
-        <SavedArticlesHeader isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} savedArticleCount={savedArticleCount} />
+        <SavedArticlesHeader isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} /*savedArticleCount={savedArticleCount}*/ />
         <SavedArticles isLoggedIn={isLoggedIn} cards={Cards} handleSignout={handleSignout} />
         <Footer showAboutMe={false} />
       </>

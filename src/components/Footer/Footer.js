@@ -13,7 +13,7 @@ function Footer({ showAboutMe }) {
           <p className="footer__copyright"> © {new Date().getFullYear()} Supersite, Powered by News API</p>
           <div className="footer__links">
             <NavLink to="/" className="footer__link">Home</NavLink>
-            <a className="footer__link" href="https://practicum.yandex.com/web/">Practicum</a>
+            <a className="footer__link" target={'_blank'} rel="noreferrer" href="https://practicum.com/en-isr/">Practicum</a>
           </div>
           <div className="footer__icons">
             <a href="https://github.com/avishaypesk" target={'_blank'} rel="noreferrer">

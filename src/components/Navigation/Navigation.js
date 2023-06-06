@@ -6,23 +6,37 @@ import Hamburger from '../../images/hamburger.svg';
 import activeHamburger from '../../images/hamburger-active.svg';
 import darkHamburger from '../../images/hamburger-dark.svg';
 
-
 export default function Navigation(props) {
-
     const currentUser = useContext(CurrentUserContext) || { name: 'Avishay' };
 
     const [darkMode, setDarkMod] = React.useState(false);
-
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+    const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
-    const handleHamburgerClick = () => {
-        setMobileMenuOpen(!mobileMenuOpen);
-    }
+    React.useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, []);
+
+    React.useEffect(() => {
+        if (windowWidth > 320) {
+            setMobileMenuOpen(false);
+        }
+    }, [windowWidth]);
 
     const location = useLocation();
     React.useEffect(() => {
         setDarkMod(location.pathname === '/saved-articles' && !mobileMenuOpen);
     }, [location, mobileMenuOpen]);
+
+    const handleHamburgerClick = () => {
+        setMobileMenuOpen(!mobileMenuOpen);
+    };
 
     function handleSignout() {
         props.setLoggedIn(false);
@@ -49,7 +63,11 @@ export default function Navigation(props) {
     );
 
     const navLogo = (
-        <NavLink to="/" className={`navigation__logo ${darkMode && !mobileMenuOpen ? 'navigation__logo_dark' : ''}`}>
+        <NavLink
+            to="/"
+            className={`navigation__logo ${darkMode && !mobileMenuOpen ? 'navigation__logo_dark' : ''}`}
+            as="nav"
+        >
             NewsExplorer
         </NavLink>
     );
@@ -57,7 +75,8 @@ export default function Navigation(props) {
     const homeLink = (
         <NavLink
             to="/"
-            className={`navigation__link navigation__current-tab ${darkMode && !mobileMenuOpen ? 'navigation__link_dark' : ''}`}
+            className={`navigation__link navigation__current-tab ${darkMode && !mobileMenuOpen ? 'navigation__link_dark' : ''
+                }`}
         >
             Home
         </NavLink>
@@ -65,7 +84,7 @@ export default function Navigation(props) {
 
     const hamburgerButton = (
         <button onClick={handleHamburgerClick} className="hamburger-button">
-            <img src={mobileMenuOpen ? activeHamburger : (darkMode && !mobileMenuOpen) ? darkHamburger : Hamburger} alt="menu" />
+            <img src={mobileMenuOpen ? activeHamburger : darkMode && !mobileMenuOpen ? darkHamburger : Hamburger} alt="menu" />
         </button>
     );
 
@@ -74,7 +93,8 @@ export default function Navigation(props) {
             return (
                 <NavLink
                     to="/saved-articles"
-                    className={`navigation__link ${darkMode && !mobileMenuOpen ? 'navigation__link_dark navigation__current-tab_dark' : ''}`}
+                    className={`navigation__link ${darkMode && !mobileMenuOpen ? 'navigation__link_dark navigation__current-tab_dark' : ''
+                        }`}
                 >
                     Saved articles
                 </NavLink>
@@ -85,15 +105,15 @@ export default function Navigation(props) {
 
     function NavigationLinks() {
         return (
-            <div className="navigation-links">
+            <nav className="navigation-links">
                 {homeLink}
                 {savedArticlesLink()}
-            </div>
+            </nav>
         );
     }
 
     return (
-        <div className="navigation">
+        <nav className="navigation">
             {navLogo}
             <div className="desktop-navigation">
                 {homeLink}
@@ -108,6 +128,6 @@ export default function Navigation(props) {
                 </div>
             )}
             <div className={`mobile-navigation-overlay ${mobileMenuOpen ? 'mobile-navigation-overlay_visible' : ''}`}></div>
-        </div>
-    )
+        </nav>
+    );
 }

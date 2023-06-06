@@ -29,6 +29,11 @@
     padding: 0;
 }
 
+.news-card-list__card {
+    list-style-type: none;
+    margin: 0;
+}
+
 .news-card-list__more-button {
     border: none;
     width: 288px;
@@ -84,6 +89,7 @@
     }
 
     .news-card-list__grid {
+        justify-content: center;
         grid-template-columns: 1fr;
         row-gap: 10px;
     }

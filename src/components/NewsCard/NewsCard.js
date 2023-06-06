@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './NewsCard.css';
 
 const Newscard = ({ card, isLoggedIn, SavedArticles }) => {
-    
     const [isSaved, setIsSaved] = useState(SavedArticles);
 
     const handleSave = () => {
@@ -39,7 +38,7 @@ const Newscard = ({ card, isLoggedIn, SavedArticles }) => {
             {SavedArticles && <p className="news-card__keyword">{card.keyword}</p>}
             <div className="news-card__article">
                 <p className="news-card__date">{card.date}</p>
-                <p className="news-card__title">{card.title}</p>
+                <h3 className="news-card__title">{card.title}</h3>
                 <p className="news-card__text">{card.text}</p>
                 <p className="news-card__source">{card.source}</p>
             </div>

@@ -1,9 +1,9 @@
 export const Cards = [
   {
     keyword: 'Nature',
-    title: 'What is Lorem Ipsum?',
+    title: 'What is Lorem Ipsum? What is lorem ipsum? What',
     text:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 123123123123123",
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make whatever is it ist ithe need of whatever took a galley of type atook a galley of type atook a galley of type atook a galley of type atook a galley of type a",
     date: 'November 4, 2023',
     source: 'treehugger',
     link: '#',
