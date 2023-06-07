@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import './App.css';
@@ -15,7 +15,8 @@ import Preloader from '../Preloader/Preloader';
 
 import Popup from '../Popup/Popup';
 
-import { Cards } from '../../utils/mockData';
+import getNews from '../../utils/newsApi';
+import api from '../../utils/mainApi';
 
 const App = () => {
 
@@ -23,13 +24,24 @@ const App = () => {
 
   const [popupType, setPopupType] = useState('signIn');
 
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(true);
 
   const [searchSubmitted, setSearchSubmitted] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [articles, setArticles] = useState([]);
+
+  const [signupError, setSignupError] = useState('');
+
   // const [savedArticleCount, setSavedArticleCount] = useState(); until api saves articles
+
+  useEffect(() => {
+    const storageArticles = JSON.parse(localStorage.getItem('articles'));
+    if (storageArticles) {
+      setArticles(storageArticles);
+    }
+  }, []);
 
   const handleChangePopupType = useCallback(() => {
     setPopupType(prevPopupType => (prevPopupType === 'signIn') ? 'signUp' : 'signIn');
@@ -41,28 +53,47 @@ const App = () => {
     setPopupOpen(false);
   }, []);
 
-  const handleSignup = useCallback((e) => {
+  const handleSignup = useCallback(async (e, email, password, name) => {
     e.preventDefault();
-    setPopupType('Success');
+
+    try {
+      const response = await api.signup({ email, password, name });
+      // You can handle the response here, if you want.
+      setPopupType('Success');
+    } catch (error) {
+      console.error('Signup failed: ', error);
+      // Display error message here
+      setSignupError('Signup failed: ', error);
+    }
   }, []);
 
-  const handleSignout = useCallback(() => {
-    setLoggedIn(false);
+  const handleSave = useCallback(async (card) => {
+    // Call to API to save the card
+  }, []);
+
+  const handleDelete = useCallback(async (cardId) => {
+    // Call to API to delete the card
   }, []);
 
   const handlePopup = () => {
     setPopupOpen(isPopupOpen => !isPopupOpen);
   };
 
-  const handleSearch = useCallback(() => {
-
+  const handleSearch = useCallback(async (searchTerm) => {
     setIsLoading(true);
 
-    setTimeout(() => {
+    try {
+      const articles = await getNews(searchTerm);
+      localStorage.setItem('articles', JSON.stringify(articles));
+      setArticles(articles);
       setSearchSubmitted(true);
+    } catch (err) {
+      console.error(err);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   }, []);
+
 
   const Home = () => (
     <>
@@ -72,7 +103,8 @@ const App = () => {
         togglePopup={handlePopup}
         onSearch={handleSearch}
       />
-      {isLoading ? <Preloader text="Searching for news..." /> : searchSubmitted && <Main isLoggedIn={isLoggedIn} cards={Cards} />}
+      {isLoading ? <Preloader text="Searching for news..." /> : searchSubmitted &&
+        <Main isLoggedIn={isLoggedIn} cards={articles} handleSave={handleSave} />}
       <Footer showAboutMe={true} />
     </>
   );
@@ -85,7 +117,7 @@ const App = () => {
     return (
       <>
         <SavedArticlesHeader isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} /*savedArticleCount={savedArticleCount}*/ />
-        <SavedArticles isLoggedIn={isLoggedIn} cards={Cards} handleSignout={handleSignout} />
+        <SavedArticles isLoggedIn={isLoggedIn} cards={articles} handleDelete={handleDelete} />
         <Footer showAboutMe={false} />
       </>
     );
@@ -106,6 +138,7 @@ const App = () => {
         handleSignup={handleSignup}
         isOpen={isPopupOpen}
         popupType={popupType}
+        errorMessage={signupError}
       />
 
     </div>

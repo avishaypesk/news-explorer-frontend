@@ -3,6 +3,7 @@ import './SearchBar.css';
 
 const SearchBar = ({ onSearch }) => {
     const [search, setSearch] = useState('');
+    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         setSearch(e.target.value);
@@ -10,7 +11,19 @@ const SearchBar = ({ onSearch }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSearch(search);
+      
+        if (search.trim() === '') {
+          setError('Please enter a keyword');
+        } else {
+          setError(null);
+      
+          try {
+            onSearch(search);
+          } catch (err) {
+            console.error(err);
+            setError('An error occurred while fetching the news');
+          }
+        }
     };
 
     return (
@@ -23,7 +36,9 @@ const SearchBar = ({ onSearch }) => {
                         className="searchbar__input"
                         value={search}
                         onChange={handleChange}
+
                     />
+                    {error && <div className="searchbar__error">{error}</div>}
                     <button className="searchbar__button" type="submit">
                         Search
                     </button>

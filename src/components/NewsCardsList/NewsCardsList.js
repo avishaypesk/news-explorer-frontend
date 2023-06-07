@@ -5,7 +5,7 @@ import './NewsCardsList.css';
 
 const INITIAL_COUNT = 3;
 
-const NewsCardsList = ({ cards = [], SavedArticles, isLoggedIn }) => {
+const NewsCardsList = ({ cards = [], SavedArticles, isLoggedIn, handleSave, handleDelete }) => {
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,9 +25,17 @@ const NewsCardsList = ({ cards = [], SavedArticles, isLoggedIn }) => {
         {!SavedArticles && <h2 className="news-card-list__title">Search results</h2>}
 
         <ul className="news-card-list__grid">
-          {visibleCards.map((card) => (
-            <li key={card.id} className="news-card-list__card">
-              <NewsCard isLoggedIn={isLoggedIn} SavedArticles={SavedArticles} card={card} />
+          {visibleCards.map((card, index) => (
+            <li key={card.id || index} className="news-card-list__card">
+
+              <NewsCard
+                isLoggedIn={isLoggedIn}
+                SavedArticles={SavedArticles}
+                card={card}
+                handleSave={handleSave}
+                handleDelete={handleDelete}
+              />
+
             </li>
           ))}
         </ul>
