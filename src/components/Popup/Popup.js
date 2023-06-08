@@ -28,7 +28,7 @@ const SignInForm = ({ onSubmit, changePopupType }) => {
     }, [email, password]);
 
     return (
-        <form className="popup__form" onSubmit={onSubmit}>
+        <form className="popup__form" onSubmit={(e) => onSubmit(e, email, password)}>
             <h3 className="popup__title">Sign in</h3>
             <FormField label="Email" type="email" placeholder="Enter email" minLength="7" value={email} onChange={e => setEmail(e.target.value)} errorMessage={emailError} />
             <FormField label="Password" type="password" placeholder="Enter password" minLength="5" value={password} onChange={e => setPassword(e.target.value)} errorMessage={passwordError} />
@@ -90,7 +90,7 @@ const SuccessMessage = ({ changePopupType }) => (
     </>
 );
 
-const Popup = ({ isOpen, popupType, handleSignin, handleSignup, handlePopup, changePopupType, signupError}) => {
+const Popup = ({ isOpen, popupType, handleSignin, handleSignup, handlePopup, changePopupType, signupError }) => {
 
     const formComponent = () => {
         switch (popupType) {

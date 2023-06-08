@@ -155,8 +155,6 @@
     margin-top: auto; 
 } 
 
-/* i dont know what the space between items should be because its not in the design :( */
-
 .mobile-navigation-overlay {
     position: fixed;
     top: 0;

@@ -1,25 +1,34 @@
 class Api {
-    constructor(auth, rootUrl) {
-        this._authToken = auth;
+    constructor(rootUrl) {
         this._rootUrl = rootUrl;
     }
 
     _fetch = ({ url, method, data }) => {
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        const jwt = localStorage.getItem('jwt');
+        if (jwt) {
+            headers['Authorization'] = `Bearer ${jwt}`;
+        }
+
         return fetch(`${this._rootUrl}${url}`, {
             method,
-            headers: {
-                authorization: `Bearer ${this._authToken}`,
-                'Content-Type': 'application/json',
-            },
+            headers,
             body: JSON.stringify(data),
         }).then(this._handleResponse);
     };
 
     _handleResponse = (res) => (res.ok ? res.json() : Promise.reject(`Error: ${res.status}`));
 
-    _handleError = (err) => Promise.reject(err);
+    _handleError = (err) => {
+        console.error(err);
+        throw err;
+    };
 
     saveArticle = (article) => {
+        console.log(article);
         return this._fetch({
             url: '/articles',
             method: 'POST',
@@ -34,11 +43,31 @@ class Api {
         }).catch(this._handleError);
     };
 
+    getSavedArticles = () => {
+        return this._fetch({
+            url: '/articles',
+            method: 'GET',
+        })
+            .then((response) => {
+                console.log(response);
+                return response; 
+            })
+            .catch(this._handleError);
+    };
+
+    getCurrentUser = () => {
+        return this._fetch({
+            url: '/users/me',
+            method: 'GET',
+
+        }).catch(this._handleError);
+    };
+
     signin = ({ email, password }) => {
         return this._fetch({
             url: '/signin',
             method: 'POST',
-            data: { email, password }
+            data: { email, password },
         }).catch(this._handleError);
     };
 
@@ -51,8 +80,6 @@ class Api {
     };
 }
 
-
-const jwt = localStorage.getItem('jwt');
-const api = new Api(jwt, 'https://api.avishaypesk-news.crabdance.com');
+const api = new Api('http://localhost:3000');
 
 export default api;

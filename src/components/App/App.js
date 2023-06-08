@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import './App.css';
 
@@ -24,7 +25,7 @@ const App = () => {
 
   const [popupType, setPopupType] = useState('signIn');
 
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const [searchSubmitted, setSearchSubmitted] = useState(false);
 
@@ -34,7 +35,11 @@ const App = () => {
 
   const [signupError, setSignupError] = useState('');
 
-  // const [savedArticleCount, setSavedArticleCount] = useState(); until api saves articles
+  const [savedArticles, setSavedArticles] = useState([]);
+
+  const [currentUser, setCurrentUser] = useState({});
+
+  const [visibleCount, setVisibleCount] = useState(3);
 
   useEffect(() => {
     const storageArticles = JSON.parse(localStorage.getItem('articles'));
@@ -43,38 +48,79 @@ const App = () => {
     }
   }, []);
 
+  const incrementVisibleCount = useCallback(() => {
+    setVisibleCount(prevVisibleCount => prevVisibleCount + 3);
+  }, []);
+
+  const fetchSavedArticles = useCallback(async () => {
+    try {
+      const articlesFromApi = await api.getSavedArticles();
+      setSavedArticles(articlesFromApi);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   const handleChangePopupType = useCallback(() => {
     setPopupType(prevPopupType => (prevPopupType === 'signIn') ? 'signUp' : 'signIn');
   }, []);
 
-  const handleSignin = useCallback((e) => {
+  useEffect(() => {
+    fetchSavedArticles();
+  }, [isLoggedIn, fetchSavedArticles]);
+
+  const handleSignin = useCallback(async (e, email, password) => {
     e.preventDefault();
-    setLoggedIn(true);
-    setPopupOpen(false);
-  }, []);
+    try {
+      const result = await api.signin({ email, password });
+      localStorage.setItem('jwt', result.token);
+      setLoggedIn(true);
+      setPopupOpen(false);
+      const user = await api.getCurrentUser();
+      setCurrentUser({ name: user.name });
+      fetchSavedArticles();
+    } catch (err) {
+      console.error('Sign in failed: ', err);
+    }
+  }, [fetchSavedArticles]);
 
   const handleSignup = useCallback(async (e, email, password, name) => {
     e.preventDefault();
-
     try {
-      const response = await api.signup({ email, password, name });
-      // You can handle the response here, if you want.
+      const result = await api.signup({ email, password, name });
+      localStorage.setItem('jwt', result.token);
       setPopupType('Success');
     } catch (error) {
       console.error('Signup failed: ', error);
-      // Display error message here
       setSignupError('Signup failed: ', error);
     }
   }, []);
 
   const handleSave = useCallback(async (card) => {
-    // Call to API to save the card
-  }, []);
+    try {
+      // Check if the article is already saved.
+      const isAlreadySaved = savedArticles.some(article => article.link === card.url);
+      if (isAlreadySaved) {
+        console.log('Article is already saved.');
+        return;
+      }
+
+      const savedArticle = await api.saveArticle(card);
+      setSavedArticles((prevSavedArticles) => [...prevSavedArticles, savedArticle]);
+    } catch (error) {
+      console.error('Failed to save article: ', error);
+    }
+  }, [savedArticles]);
+
 
   const handleDelete = useCallback(async (cardId) => {
-    // Call to API to delete the card
+    try {
+      await api.deleteArticle(cardId);
+      setSavedArticles((prevSavedArticles) => prevSavedArticles.filter((article) => article._id !== cardId));
+    } catch (error) {
+      console.error('Failed to delete article: ', error);
+    }
   }, []);
-
   const handlePopup = () => {
     setPopupOpen(isPopupOpen => !isPopupOpen);
   };
@@ -102,9 +148,15 @@ const App = () => {
         setLoggedIn={setLoggedIn}
         togglePopup={handlePopup}
         onSearch={handleSearch}
+        currentUserName={currentUser ? currentUser.name : ''}
       />
-      {isLoading ? <Preloader text="Searching for news..." /> : searchSubmitted &&
-        <Main isLoggedIn={isLoggedIn} cards={articles} handleSave={handleSave} />}
+      {isLoading ? <Preloader text="Searching for news..." /> : searchSubmitted && (
+        <Main isLoggedIn={isLoggedIn}
+          cards={articles}
+          handleSave={handleSave}
+          visibleCount={visibleCount}
+          incrementVisibleCount={incrementVisibleCount} />
+      )}
       <Footer showAboutMe={true} />
     </>
   );
@@ -114,10 +166,34 @@ const App = () => {
       return <Navigate to="/" />;
     }
 
+    const savedArticleCount = savedArticles.length;
+
+    const keywordCounts = savedArticles.reduce((acc, current) => {
+      const keyword = current.keyword;
+      if (!acc[keyword]) {
+        acc[keyword] = 0;
+      }
+      acc[keyword]++;
+      return acc;
+    }, {});
+
+    const keywords = Object.keys(keywordCounts).sort((a, b) => keywordCounts[b] - keywordCounts[a]);
+
     return (
       <>
-        <SavedArticlesHeader isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} /*savedArticleCount={savedArticleCount}*/ />
-        <SavedArticles isLoggedIn={isLoggedIn} cards={articles} handleDelete={handleDelete} />
+        <SavedArticlesHeader
+          isLoggedIn={isLoggedIn}
+          setLoggedIn={setLoggedIn}
+          savedArticleCount={savedArticleCount}
+          keywords={keywords}
+        />
+        <SavedArticles isLoggedIn={isLoggedIn}
+          cards={savedArticles}
+          handleDelete={handleDelete}
+          visibleCount={visibleCount}
+          incrementVisibleCount={incrementVisibleCount}
+        />
+
         <Footer showAboutMe={false} />
       </>
     );
@@ -125,23 +201,25 @@ const App = () => {
 
   return (
     <div className="app">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/saved-articles" element={<SavedArticlesPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/saved-articles" element={<SavedArticlesPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
 
-      <Popup
-        changePopupType={handleChangePopupType}
-        handlePopup={handlePopup}
-        handleSignin={handleSignin}
-        handleSignup={handleSignup}
-        isOpen={isPopupOpen}
-        popupType={popupType}
-        errorMessage={signupError}
-      />
-
+        <Popup
+          changePopupType={handleChangePopupType}
+          handlePopup={handlePopup}
+          handleSignin={handleSignin}
+          handleSignup={handleSignup}
+          isOpen={isPopupOpen}
+          popupType={popupType}
+          errorMessage={signupError}
+        />
+      </CurrentUserContext.Provider>
     </div>
+
   );
 };
 

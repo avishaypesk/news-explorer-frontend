@@ -1,6 +1,7 @@
 const API_KEY = 'cfba2fec87f0451f974d12c07e028c0a';
 
 const getNews = async (keyword) => {
+
   const today = new Date();
   const sevenDaysAgo = new Date(today.getTime() - (1000 * 60 * 60 * 24 * 7));
 
@@ -21,7 +22,12 @@ const getNews = async (keyword) => {
 
   const data = await response.json();
 
-  return data.articles;
+  const articles = data.articles.map(article => ({
+    ...article,
+    keyword: keyword,  
+  }));
+
+  return articles;
 };
 
 export default getNews;
