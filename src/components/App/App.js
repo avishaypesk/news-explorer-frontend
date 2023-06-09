@@ -13,6 +13,7 @@ import SavedArticlesHeader from '../SavedArticlesHeader/SavedArticlesHeader';
 import Footer from '../Footer/Footer';
 
 import Preloader from '../Preloader/Preloader';
+import NothingFound from '../NothingFound/NothingFound';
 
 import Popup from '../Popup/Popup';
 
@@ -64,10 +65,6 @@ const App = () => {
   const handleChangePopupType = useCallback(() => {
     setPopupType(prevPopupType => (prevPopupType === 'signIn') ? 'signUp' : 'signIn');
   }, []);
-
-  useEffect(() => {
-    fetchSavedArticles();
-  }, [isLoggedIn, fetchSavedArticles]);
 
   const handleSignin = useCallback(async (e, email, password) => {
     e.preventDefault();
@@ -150,16 +147,19 @@ const App = () => {
         onSearch={handleSearch}
         currentUserName={currentUser ? currentUser.name : ''}
       />
-      {isLoading ? <Preloader text="Searching for news..." /> : searchSubmitted && (
+      {isLoading ? <Preloader text="Searching for news..." /> : 
+      searchSubmitted && (
+        articles.length > 0 ?
         <Main isLoggedIn={isLoggedIn}
           cards={articles}
           handleSave={handleSave}
           visibleCount={visibleCount}
           incrementVisibleCount={incrementVisibleCount} />
+        : <NothingFound />
       )}
       <Footer showAboutMe={true} />
     </>
-  );
+);
 
   const SavedArticlesPage = () => {
     if (!isLoggedIn) {

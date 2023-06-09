@@ -24,7 +24,7 @@ const Newscard = ({ card, isLoggedIn, savedArticles, handleSave, handleDelete })
     };
 
     const openLink = () => {
-        window.open(card.url, '_blank');
+        window.open(card.link, '_blank');
     };
 
     const date = new Date(card.publishedAt);
