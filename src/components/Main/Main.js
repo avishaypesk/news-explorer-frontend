@@ -9,7 +9,7 @@ const Main = ({ cards, isLoggedIn, handleSave, visibleCount, incrementVisibleCou
       <NewsCardsList
         isLoggedIn={isLoggedIn}
         cards={cards}
-        savedArticles={false}
+        isSavedArticlesPage={false}
         handleSave={handleSave}
         visibleCount={visibleCount}
         incrementVisibleCount={incrementVisibleCount}

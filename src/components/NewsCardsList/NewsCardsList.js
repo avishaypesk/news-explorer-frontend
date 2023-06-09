@@ -4,7 +4,7 @@ import './NewsCardsList.css';
 
 const NewsCardsList = ({
   cards = [],
-  savedArticles,
+  isSavedArticlesPage,
   isLoggedIn,
   handleSave,
   handleDelete,
@@ -21,14 +21,14 @@ const NewsCardsList = ({
   return (
     <div className="news-card-list">
       <div className="news-card-list__container">
-        {!savedArticles && <h2 className="news-card-list__title">Search results</h2>}
+        {!isSavedArticlesPage && <h2 className="news-card-list__title">Search results</h2>}
 
         <ul className="news-card-list__grid">
           {visibleCards.map((card, index) => (
             <li key={card.id || index} className="news-card-list__card">
               <NewsCard
                 isLoggedIn={isLoggedIn}
-                savedArticles={savedArticles}
+                isSavedArticlesPage={isSavedArticlesPage}
                 card={card}
                 handleSave={handleSave}
                 handleDelete={handleDelete}

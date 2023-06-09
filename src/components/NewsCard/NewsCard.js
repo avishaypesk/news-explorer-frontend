@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './NewsCard.css';
 
-const Newscard = ({ card, isLoggedIn, savedArticles, handleSave, handleDelete }) => {
+const Newscard = ({ card, isLoggedIn, isSavedArticlesPage, handleSave, handleDelete }) => {
 
-    const [isSaved, setIsSaved] = useState(savedArticles);
+    const [isSaved, setIsSaved] = useState(isSavedArticlesPage);
 
     const saveArticle = (event) => {
         event.stopPropagation();
@@ -40,7 +40,7 @@ const Newscard = ({ card, isLoggedIn, savedArticles, handleSave, handleDelete })
         ButtonIcon = <i className="news-card__bookmark-icon" />;
         ButtonLabel = 'Sign in to save articles';
     } else if (isSaved) {
-        if (savedArticles) {
+        if (isSavedArticlesPage) {
             ButtonIcon = <i className="news-card__remove-icon" />;
             ButtonLabel = 'Remove from saved';
         } else {
@@ -61,7 +61,7 @@ const Newscard = ({ card, isLoggedIn, savedArticles, handleSave, handleDelete })
                 <div className="news-card__label">{ButtonLabel}</div>
                 <button onClick={isSaved ? deleteArticle : saveArticle} className="news-card__button">{ButtonIcon}</button>
             </div>
-            {savedArticles && <p className="news-card__keyword">{card.keyword}</p>}
+            {isSavedArticlesPage && <p className="news-card__keyword">{card.keyword}</p>}
             <div className="news-card__article">
                 <p className="news-card__date">{formattedDate}</p>
                 <h3 className="news-card__title">{card.title}</h3>

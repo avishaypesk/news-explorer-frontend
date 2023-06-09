@@ -8,7 +8,7 @@ const SavedArticles = ({ cards, isLoggedIn, handleDelete, visibleCount, incremen
             <NewsCardsList
                 cards={cards}
                 isLoggedIn={isLoggedIn}
-                savedArticles={true}
+                isSavedArticlesPage={true}
                 handleDelete={handleDelete}
                 visibleCount={visibleCount}
                 incrementVisibleCount={incrementVisibleCount}
