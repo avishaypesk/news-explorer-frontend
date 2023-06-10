@@ -28,7 +28,6 @@ class Api {
     };
 
     saveArticle = (article) => {
-        console.log(article);
         return this._fetch({
             url: '/articles',
             method: 'POST',
@@ -49,7 +48,6 @@ class Api {
             method: 'GET',
         })
             .then((response) => {
-                console.log(response);
                 return response; 
             })
             .catch(this._handleError);
