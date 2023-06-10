@@ -78,6 +78,6 @@ class Api {
     };
 }
 
-const api = new Api('http://localhost:3000');
+const api = new Api('https://api.avishaypesk-news.ignorelist.com');
 
 export default api;

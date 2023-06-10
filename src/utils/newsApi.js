@@ -10,7 +10,7 @@ const getNews = async (keyword) => {
 
   const encodedKeyword = encodeURIComponent(keyword);
 
-  const url = `https://newsapi.org/v2/everything?q=${encodedKeyword}&apiKey=${API_KEY}&from=${from}&to=${to}&pageSize=100`;
+  const url = `https://https://nomoreparties.co/v2/everything?q=${encodedKeyword}&apiKey=${API_KEY}&from=${from}&to=${to}&pageSize=100`;
 
   const response = await fetch(url);
 
