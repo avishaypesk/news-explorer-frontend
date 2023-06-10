@@ -9,7 +9,8 @@ const NewsCardsList = ({
   handleSave,
   handleDelete,
   visibleCount,
-  incrementVisibleCount
+  incrementVisibleCount,
+  isArticleSaved
 }) => {
   const handleIncrement = useCallback(() => {
     incrementVisibleCount();
@@ -32,6 +33,7 @@ const NewsCardsList = ({
                 card={card}
                 handleSave={handleSave}
                 handleDelete={handleDelete}
+                isSaved={isArticleSaved(card)} 
               />
             </li>
           ))}

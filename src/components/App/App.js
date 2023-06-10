@@ -95,7 +95,6 @@ const App = () => {
 
   const handleSave = useCallback(async (card) => {
     try {
-      // Check if the article is already saved.
       const isAlreadySaved = savedArticles.some(article => article.link === card.url);
       if (isAlreadySaved) {
         console.log('Article is already saved.');
@@ -104,6 +103,9 @@ const App = () => {
 
       const savedArticle = await api.saveArticle(card);
       setSavedArticles((prevSavedArticles) => [...prevSavedArticles, savedArticle]);
+
+      const cardWithId = { ...card, _id: savedArticle._id };
+      setArticles((prevArticles) => prevArticles.map((article) => article.url === card.url ? cardWithId : article));
     } catch (error) {
       console.error('Failed to save article: ', error);
     }
@@ -113,11 +115,27 @@ const App = () => {
   const handleDelete = useCallback(async (cardId) => {
     try {
       await api.deleteArticle(cardId);
-      setSavedArticles((prevSavedArticles) => prevSavedArticles.filter((article) => article._id !== cardId));
+      setSavedArticles((prevSavedArticles) =>
+        prevSavedArticles.filter((article) => article._id !== cardId)
+      );
+      setArticles((prevArticles) =>
+        prevArticles.map((article) => {
+          if (article._id === cardId) {
+            const { _id, ...rest } = article;
+            return rest;
+          }
+          return article;
+        })
+      );
     } catch (error) {
       console.error('Failed to delete article: ', error);
     }
   }, []);
+
+  const isArticleSaved = useCallback((card) => {
+    return savedArticles.some(article => article.link === card.url);
+  }, [savedArticles]);
+
   const handlePopup = () => {
     setPopupOpen(isPopupOpen => !isPopupOpen);
   };
@@ -147,19 +165,21 @@ const App = () => {
         onSearch={handleSearch}
         currentUserName={currentUser ? currentUser.name : ''}
       />
-      {isLoading ? <Preloader text="Searching for news..." /> : 
-      searchSubmitted && (
-        articles.length > 0 ?
-        <Main isLoggedIn={isLoggedIn}
-          cards={articles}
-          handleSave={handleSave}
-          visibleCount={visibleCount}
-          incrementVisibleCount={incrementVisibleCount} />
-        : <NothingFound />
-      )}
+      {isLoading ? <Preloader text="Searching for news..." /> :
+        searchSubmitted && (
+          articles.length > 0 ?
+            <Main isLoggedIn={isLoggedIn}
+              cards={articles}
+              handleSave={handleSave}
+              handleDelete={handleDelete}
+              visibleCount={visibleCount}
+              incrementVisibleCount={incrementVisibleCount}
+              isArticleSaved={isArticleSaved} />
+            : <NothingFound />
+        )}
       <Footer showAboutMe={true} />
     </>
-);
+  );
 
   const SavedArticlesPage = () => {
     if (!isLoggedIn) {
@@ -192,6 +212,7 @@ const App = () => {
           handleDelete={handleDelete}
           visibleCount={visibleCount}
           incrementVisibleCount={incrementVisibleCount}
+          isArticleSaved={isArticleSaved}
         />
 
         <Footer showAboutMe={false} />
