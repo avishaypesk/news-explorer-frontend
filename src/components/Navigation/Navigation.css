@@ -1,0 +1,274 @@
+.navigation {
+    height: 80px;
+    padding: 0 104px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 4;
+}
+
+.navigation::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    outline: rgba(196, 196, 196, .3) 1px solid;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.desktop-navigation {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navigation__logo {
+    z-index: 4;
+    margin: auto auto auto 0;
+    font-family: 'Roboto-Slab', serif;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navigation__logo_dark {
+    color: #1A1B22;
+}
+
+.navigation__link {
+    white-space: nowrap;
+    flex-grow: 1;
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.navigation__link_dark {
+    color: #1A1B22;
+}
+
+.navigation__current-tab {
+    border-bottom: #fff 3px solid;
+}
+
+.navigation__current-tab_dark {
+    border-bottom: #1A1B22 3px solid;
+}
+
+.navigation__logout,
+.navigation__signin {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    color: #fff;
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 100px;
+    width: 176px;
+    height: 48px;
+    padding: 12px 12px;
+    margin: 15px 0;
+    cursor: pointer;
+    margin-left: 32px;
+}
+
+.navigation__logout::after {
+    content: '';
+    background-image: url('../../images/logout.svg');
+    background-repeat: no-repeat;
+    background-position: right;
+    width: 17px;
+    height: 17px;
+    padding-left: 14px;
+}
+
+.navigation__logout_dark {
+    border: 1px solid #1A1B22;
+    color: #1A1B22;
+}
+
+.navigation__logout_dark::after {
+    background-image: url('../../images/logout_dark.svg');
+}
+
+.navigation__logout:hover,
+.navigation__signin:hover {
+    opacity: 0.8;
+}
+
+.hamburger-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 4;
+}
+
+.hamburger-button img {
+    width: 24px;
+}
+
+.mobile-navigation {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #1A1B22;
+    position: absolute;
+    height: 230px;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    max-height: 0;
+    z-index: 3;
+    border-radius: 0 0 10px 10px;
+}
+
+.navigation-links {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: auto; 
+} 
+
+/* i dont know what the space between items should be because its not in the design :( */
+
+.mobile-navigation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.5;
+    z-index: 2;
+    display: none;
+}
+
+.mobile-navigation-overlay_visible {
+    display: block;
+}
+
+.mobile-navigation_open {
+    display: flex;
+    max-height: 300px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .navigation {
+        height: 60px;
+        padding: 0 40px;
+    }
+
+    .navigation::after {
+        height: 60px;
+    }
+
+    .navigation__logo {
+        margin: auto 204px auto 0;
+    }
+
+    .navigation__link {
+        font-size: 16px;
+        line-height: 24px;
+        padding: 0 8px;
+        margin: 0 16px 0 0;
+    }
+
+    .navigation__logout,
+    .navigation__signin {
+        margin: auto 0 auto;
+        max-width: 152px;
+        max-height: 40px;
+    }
+
+}
+
+@media screen and (max-width: 760px) {
+
+    .navigation__logo {
+        margin: auto;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .navigation {
+        height: 56px;
+        padding: 0 16px;
+        z-index: 3;
+    }
+
+    .navigation::after {
+        height: 56px;
+    }
+
+    .navigation__link {
+        max-height: 24px;
+        font-weight: 500;
+        align-self: start;
+        margin: 0 auto 22px 0;
+        width: 100%;
+    }
+
+    .navigation__current-tab,
+    .navigation__current-tab_dark {
+        border-bottom: none
+    }
+
+    .navigation__logout,
+    .navigation__signin {
+        width: 100%;
+        max-width: 288px;
+        max-height: none;
+        height: 56px;
+        margin: 0 auto 24px;
+    }
+
+    .desktop-navigation {
+        display: none;
+    }
+
+    .hamburger-button {
+        display: block;
+    }
+
+    .mobile-navigation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navigation__logo {
+        width: 117px;
+        font-size: 16px;
+        line-height: 24px;
+        margin: 16px 16px 16px 0;
+    }
+}
