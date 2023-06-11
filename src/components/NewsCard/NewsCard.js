@@ -19,7 +19,7 @@ const Newscard = ({ card, isLoggedIn, isSavedArticlesPage, handleSave, handleDel
 
 
     const openLink = () => {
-        window.open(card.link, '_blank');
+        window.open(card.url, '_blank');
     };
 
     const date = new Date(card.publishedAt);
@@ -34,7 +34,7 @@ const Newscard = ({ card, isLoggedIn, isSavedArticlesPage, handleSave, handleDel
     if (!isLoggedIn) {
         ButtonIcon = <i className="news-card__bookmark-icon" />;
         ButtonLabel = 'Sign in to save articles';
-        ButtonAction = saveArticle; // Default action
+        ButtonAction = saveArticle; 
     } else {
         if (isSavedArticlesPage) {
             ButtonIcon = <i className="news-card__remove-icon" />;
