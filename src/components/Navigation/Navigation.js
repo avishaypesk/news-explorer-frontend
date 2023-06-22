@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import './Navigation.css';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Hamburger from '../../images/hamburger.svg';
 import activeHamburger from '../../images/hamburger-active.svg';
 import darkHamburger from '../../images/hamburger-dark.svg';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 
 export default function Navigation(props) {
     const currentUser = useContext(CurrentUserContext) || { name: 'Avishay' };
+
 
     const [darkMode, setDarkMod] = React.useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -51,7 +53,7 @@ export default function Navigation(props) {
             onClick={handleSignout}
             className={`navigation__logout ${darkMode && !mobileMenuOpen ? 'navigation__logout_dark' : ''}`}
         >
-            {currentUser.name}
+            {currentUser ? currentUser.name : ''}
         </button>
     ) : (
         <button

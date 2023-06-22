@@ -1,46 +1,71 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './NewsCard.css';
 
-const Newscard = ({ card, isLoggedIn, SavedArticles }) => {
-    const [isSaved, setIsSaved] = useState(SavedArticles);
+const Newscard = ({ card, isLoggedIn, isSavedArticlesPage, handleSave, handleDelete, isSaved }) => {
 
-    const handleSave = () => {
-        if (isLoggedIn && !SavedArticles) {
-            setIsSaved(!isSaved);
-        }
+    const saveArticle = (event) => {
+        event.stopPropagation();
+        if (isLoggedIn && !isSaved) {
+            handleSave(card)
+        };
+    }
+
+    const deleteArticle = (event) => {
+        event.stopPropagation();
+        // if (isLoggedIn && isSaved) {
+            handleDelete(card._id);
+        // }
     };
 
-    const showRemoveIcon = SavedArticles;
 
-    let ButtonIcon, ButtonLabel;
+    const openLink = () => {
+        window.open(card.url, '_blank');
+    };
+
+    const date = new Date(card.publishedAt);
+    const formattedDate = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+
+    let ButtonIcon, ButtonLabel, ButtonAction;
 
     if (!isLoggedIn) {
         ButtonIcon = <i className="news-card__bookmark-icon" />;
         ButtonLabel = 'Sign in to save articles';
-    } else if (showRemoveIcon) {
-        ButtonIcon = <i className="news-card__remove-icon" />;
-        ButtonLabel = 'Remove from saved';
-    } else if (isSaved) {
-        ButtonIcon = <i className="news-card__saved-icon" />;
-        ButtonLabel = 'Saved';
+        ButtonAction = saveArticle; 
     } else {
-        ButtonIcon = <i onClick={handleSave} className="news-card__bookmark-icon" />;
-        ButtonLabel = 'Save';
+        if (isSavedArticlesPage) {
+            ButtonIcon = <i className="news-card__remove-icon" />;
+            ButtonLabel = 'Remove from saved';
+            ButtonAction = deleteArticle;
+        } else if (isSaved) {
+            ButtonIcon = <i className="news-card__saved-icon" />;
+            ButtonLabel = 'Saved';
+            ButtonAction = deleteArticle;
+        } else {
+            ButtonIcon = <i className="news-card__bookmark-icon" />;
+            ButtonLabel = 'Save';
+            ButtonAction = saveArticle;
+        }
     }
 
+    const imageUrl = card.urlToImage || card.image;
+
     return (
-        <div className="news-card">
-            <img className="news-card__image" src={card.image} alt={card.title} />
-            <div className="news-card__container" onClick={handleSave}>
+        <div className="news-card" onClick={openLink}>
+            <img className="news-card__image" src={imageUrl} alt={card.title} />
+            <div className="news-card__container">
                 <div className="news-card__label">{ButtonLabel}</div>
-                <div className="news-card__button">{ButtonIcon}</div>
+                <button onClick={ButtonAction} className="news-card__button">{ButtonIcon}</button>
             </div>
-            {SavedArticles && <p className="news-card__keyword">{card.keyword}</p>}
+            {isSavedArticlesPage && <p className="news-card__keyword">{card.keyword}</p>}
             <div className="news-card__article">
-                <p className="news-card__date">{card.date}</p>
+                <p className="news-card__date">{formattedDate}</p>
                 <h3 className="news-card__title">{card.title}</h3>
-                <p className="news-card__text">{card.text}</p>
-                <p className="news-card__source">{card.source}</p>
+                <p className="news-card__text">{card.description}</p>
+                <p className="news-card__source">{card.source.name}</p>
             </div>
         </div>
     );

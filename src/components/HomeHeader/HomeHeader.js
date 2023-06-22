@@ -4,7 +4,9 @@ import SearchBar from '../SearchBar/SearchBar';
 import './HomeHeader.css'
 
 
-const HomeHeader = ({ isLoggedIn, setLoggedIn, togglePopup, toggleFormPopup, toggleRegisterPopup, onSearch }) => {
+
+const HomeHeader = ({ isLoggedIn, setLoggedIn, togglePopup, toggleFormPopup, toggleRegisterPopup, onSearch, currentUserName }) => {
+
   return (
     <>
       <header className="header">
@@ -14,7 +16,7 @@ const HomeHeader = ({ isLoggedIn, setLoggedIn, togglePopup, toggleFormPopup, tog
           togglePopup={togglePopup}
           toggleFormPopup={toggleFormPopup}
           toggleRegisterPopup={toggleRegisterPopup}
-        />
+          />
         <div className='header__container'>
           <h1 className="header__title">What's going on in the world?</h1>
           <h2 className="header__subtitle">Find the latest news on any topic and save them in your personal account.</h2>
