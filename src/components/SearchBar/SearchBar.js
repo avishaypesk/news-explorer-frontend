@@ -7,22 +7,23 @@ const SearchBar = ({ onSearch }) => {
 
     const handleChange = (e) => {
         setSearch(e.target.value);
+        setError(null);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-      
+
         if (search.trim() === '') {
-          setError('Please enter a keyword');
+            setError('Please enter a keyword');
         } else {
-          setError(null);
-      
-          try {
-            onSearch(search);
-          } catch (err) {
-            console.error(err);
-            setError('An error occurred while fetching the news');
-          }
+            setError(null);
+
+            try {
+                onSearch(search);
+            } catch (err) {
+                console.error(err);
+                setError('An error occurred while fetching the news');
+            }
         }
     };
 
@@ -36,14 +37,13 @@ const SearchBar = ({ onSearch }) => {
                         className="searchbar__input"
                         value={search}
                         onChange={handleChange}
-
                     />
-                    {error && <div className="searchbar__error">{error}</div>}
                     <button className="searchbar__button" type="submit">
                         Search
                     </button>
                 </form>
             </div>
+            <div className={`searchbar__error ${error ? 'visible' : ''}`}>{error}</div>
         </section>
     );
 };
